@@ -1,24 +1,53 @@
-# Compiled class file
-*.class
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
 
-# Log file
+# Virtual environment
+venv/
+.env/
+.venv/
+env/
+ENV/
+
+# Logs and databases
 *.log
+*.sqlite3
+*.db
+*.sqlite
 
-# BlueJ files
-*.ctxt
+# Python packaging
+*.egg-info/
+dist/
+build/
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# Testing and coverage reports
+.coverage
+htmlcov/
+*.cover
+*.py,cover
+
+# PyInstaller
+*.spec
+
+# MyPy and type checking
+.mypy_cache/
+
+# FastAPI / Uvicorn related files
+*.pid
+
+# Docker and deployment files
+docker-compose.override.yml
+
+# Custom local configuration
+config.yaml
+secrets.json
