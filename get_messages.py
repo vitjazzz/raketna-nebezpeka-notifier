@@ -1,5 +1,4 @@
 from telethon import TelegramClient, events
-from playsound import playsound
 import requests
 import time
 import asyncio
@@ -42,7 +41,6 @@ async def new_message_handler(event):
             print("Keyword detected! Playing sound.")
             for url in urls:
                 requests.post(url, headers=headers)
-            playsound('alarm.mp3')
             time.sleep(5)
             for url in urls:
                 requests.post(url, headers=headers)
