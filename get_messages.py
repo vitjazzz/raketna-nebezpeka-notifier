@@ -3,12 +3,17 @@ from playsound import playsound
 import requests
 import time
 
-API_ID = 666
-API_HASH = ""
-PHONE_NUMBER = ""
-CHANNEL = ""
+from dotenv import load_dotenv
+import os
 
-PUSHCUT_API_KEY = ""
+load_dotenv()
+
+API_ID = os.getenv("API_ID")
+API_HASH = os.getenv("API_HASH")
+PHONE_NUMBER = os.getenv("PHONE_NUMBER")
+CHANNEL = os.getenv("CHANNEL")
+
+PUSHCUT_API_KEY = os.getenv("PUSHCUT_API_KEY")
 NOTIFICATION_NAME = "My%20First%20Notification"
 headers = {
     "Content-Type": "application/json"
