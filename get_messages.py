@@ -3,10 +3,10 @@ from playsound import playsound
 import requests
 import time
 
-API_ID = 666 
+API_ID = 666
 API_HASH = ""
-PHONE_NUMBER = "+380964449048"
-CHANNEL = "kyiv_nebo"
+PHONE_NUMBER = ""
+CHANNEL = ""
 
 PUSHCUT_API_KEY = ""
 NOTIFICATION_NAME = "My%20First%20Notification"
@@ -32,8 +32,8 @@ async def new_message_handler(event):
         if any(keyword in lower_text for keyword in keywords):
             print("Keyword detected! Playing sound.")
             requests.post(url, headers=headers)
-            # playsound('alarm.wav')
-            # playsound('alarm.mp3')
+            playsound('alarm.wav')
+            playsound('alarm.mp3')
             time.sleep(5)
             requests.post(url, headers=headers)
         else:

@@ -1,4 +1,3 @@
-pip install telethon
-pip install playsound==1.2.2
-pip install pyobjc
-pip install requests
+telethon
+playsound==1.2.2
+requests
