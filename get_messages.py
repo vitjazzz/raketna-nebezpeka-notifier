@@ -19,7 +19,9 @@ headers = {
     "Content-Type": "application/json"
 }
 
-url = f"https://api.pushcut.io/{PUSHCUT_API_KEY}/notifications/{NOTIFICATION_NAME}"
+base_url_format = "https://api.pushcut.io/{key}/notifications/{notification_name}"
+pushcut_keys = [key.strip() for key in PUSHCUT_API_KEY.split("|")]
+urls = [base_url_format.format(key=key, notification_name=NOTIFICATION_NAME) for key in pushcut_keys]
 
 keywords = ['ракет', 'зліт', 'балістик', 'центр', 'берестей', 'лук\'янівка', 'поділ', 'липки']
 
@@ -36,11 +38,13 @@ async def new_message_handler(event):
         lower_text = text.lower()
         if any(keyword in lower_text for keyword in keywords):
             print("Keyword detected! Playing sound.")
-            requests.post(url, headers=headers)
+            for url in urls:
+                requests.post(url, headers=headers)
             playsound('alarm.wav')
             playsound('alarm.mp3')
             time.sleep(5)
-            requests.post(url, headers=headers)
+            for url in urls:
+                requests.post(url, headers=headers)
         else:
             print("No matching keywords in the message.")
     else:
