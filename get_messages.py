@@ -15,19 +15,21 @@ CHANNEL = os.getenv("CHANNEL")
 CONTROL_CHANNEL = os.getenv("CONTROL_CHANNEL")
 
 PUSHCUT_API_KEY = os.getenv("PUSHCUT_API_KEY")
-NOTIFICATION_NAME = "My%20First%20Notification"
+NOTIFICATION_NAMES = os.getenv("NOTIFICATION_NAMES")
 headers = {
     "Content-Type": "application/json"
 }
 
 base_url_format = "https://api.pushcut.io/{key}/notifications/{notification_name}"
 pushcut_keys = [key.strip() for key in PUSHCUT_API_KEY.split("|")]
-urls = [base_url_format.format(key=key, notification_name=NOTIFICATION_NAME) for key in pushcut_keys]
+notification_names = [name.strip() for name in NOTIFICATION_NAMES.split("|")]
+urls = [
+    base_url_format.format(key=key, notification_name=name)
+    for key, name in zip(pushcut_keys, notification_names)
+]
 
-keywords = ['ракет', 'зліт', 'балістик', 'центр', 'берестей', 'лук\'янівка', 'поділ', 'липки']
+keywords = ['калібр', 'ракет', 'зліт', 'балістик', 'центр', 'берестей', 'лук\'янівка', 'поділ', 'липки']
 
-
-# Create the Telethon client
 client = TelegramClient("session_name", API_ID, API_HASH)
 
 client.start(PHONE_NUMBER)
@@ -46,9 +48,11 @@ async def new_message_handler(event):
                 requests.post(url, headers=headers)
         else:
             print("No matching keywords in the message.")
+    else:
+        print("Received a message with no text.")
+    
 
-
-message_text = f"Аналізую канал '{CHANNEL}', підписників - {len(urls)}."
+message_text = f"Я працюю, підписників - {len(urls)}."
 
 async def send_message_periodically():
     while True:
@@ -57,7 +61,6 @@ async def send_message_periodically():
         except Exception as e:
             print("Error sending message:", e)
         await asyncio.sleep(2 * 3600)
-
 
 with client:
     client.loop.run_until_complete(send_message_periodically())
